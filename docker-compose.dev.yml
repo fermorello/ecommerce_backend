@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  api:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+    command: npm run dev
+  mongo:
+    container_name: mymongodatabase
+    image: mongo
+    ports:
+      - 27017:27017
+    logging:
+      driver: none
+    
